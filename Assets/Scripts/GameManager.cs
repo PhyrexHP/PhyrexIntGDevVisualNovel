@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void AdvanceDialogue()
     {
-        if (phaseIndex > 4)
+        if (phaseIndex < 4)
         {
 
             dialogueIndex++;
