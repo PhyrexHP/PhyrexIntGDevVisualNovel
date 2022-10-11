@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     public List<string> partFourLeftDialogue;
     public List<string> partFourRightDialogue;
     public List<string> badEndDialogue;
+    public List<string> finaleGrittyDialogue;
+    public List<string> finaleGrimaceDialogue;
+    public List<string> grittyEndDialogue;
+    public List<string> grimaceEndDialogue;
 
     List<string> currentDialogue;
 
@@ -58,12 +62,12 @@ public class GameManager : MonoBehaviour
 
     void SetDialogueText()
     {
-            dialogueBox.text = currentDialogue[dialogueIndex];
+        dialogueBox.text = currentDialogue[dialogueIndex];
     }
 
     public void AdvanceDialogue()
     {
-        if (phaseIndex < 5)
+        if (phaseIndex < 6)
         {
 
             dialogueIndex++;
@@ -82,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     void SetupChoices()
     {
-        if (phaseIndex < 4)
+        if (phaseIndex < 5)
         {
             nextButton.SetActive(false);
             choiceOne.SetActive(true);
@@ -149,6 +153,8 @@ public class GameManager : MonoBehaviour
                 {
                     phaseIndex = 3;
                     currentDialogue = partFourLeftDialogue;
+                    choiceOneBox.text = "HOCKEY";
+                    choiceTwoBox.text = "MCDONALDS";
                 }
                 else
                 {
@@ -158,11 +164,31 @@ public class GameManager : MonoBehaviour
                 break;
             case 3:
                 phaseIndex = 5;
+                if (yesNumber >= 4)
+                {
+                    currentDialogue = finaleGrittyDialogue;
+                }
+                else
+                {
+                    currentDialogue = finaleGrimaceDialogue;
+                }
                 break;
             case 4:
                 currentDialogue = badEndDialogue;
-                phaseIndex = 5;
+                phaseIndex = 6;
                 break;
+            case 5:
+                if (yesNumber >= 4)
+                {
+                    currentDialogue = grittyEndDialogue;
+                }
+                else
+                {
+                    currentDialogue = grimaceEndDialogue;
+                }
+                phaseIndex = 6;
+                break;
+
         }
 
     SetDialogueText();
