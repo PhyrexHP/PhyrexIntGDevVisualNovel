@@ -869,7 +869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partOneDialogue:
-  - 'Grity: Hey kid, wanna buy some hockey pucks?'
+  - 'Gritty: Hey kid, wanna buy some hockey pucks?'
   - 'Grimace: Sorry, he''s a little out of it.'
   - 'Gritty: Stuff it, corporate swine!'
   - 'Grimace: A lottle out of it, apparently. '
@@ -912,13 +912,46 @@ MonoBehaviour:
   - 'Gritty: Left or right, kid.'
   - '*Gritty pulls out two cups*'
   - '*Left or right?*'
-  partFourLeftDialogue: []
+  partFourLeftDialogue:
+  - '*You drink the liquid in the cup*'
+  - ...
+  - '*Its... capri sun?*'
+  - '*You look at Gritty, confused*'
+  - 'Gritty: Just thought you should stay hydrated! '
+  - '*He tosses the other liquid behind his back. It makes an unsettling hiss as
+    it comes in contact with the ground*'
+  - 'Gritty: Anyways, one more question for ya before we let you go.'
+  - 'Grimace: Can I ask this one, Gritty?'
+  - 'Gritty: Eh, sure.'
+  - 'Grimace: Great! Thank you.'
+  - 'Grimace: Which T-Shirt do you want to take home!'
+  - '*Gritty holds up two T-Shirts*'
+  - '*One has the logo for the Philadelphia Flyers, and the other has the McDonalds
+    golden arches emblazoned across its face*'
+  - 'Grimace: Take your pick!'
   partFourRightDialogue:
   - '*You drink the right cup*'
   - ...
   - '*You pass out*'
+  - '*You pass out*'
   badEndDialogue:
   - BAD END
+  finaleGrittyDialogue:
+  - 'Gritty: EXCELLENT choice!'
+  - 'Gritty: You''re pretty cool, kid. Here''s a season pass to come see me perform
+    whenever you want.'
+  - '*Gritty hands you a crayon drawing that says "seezun pass :)"*'
+  - 'Gritty: See you soon bud!'
+  - 'Gritty: See you soon bud!'
+  finaleGrimaceDialogue:
+  - 'Grimace: Great choice! I hope you had a great time!'
+  - 'Grimace: Time to head back home now, it was nice meeting you!'
+  - 'Grimace: Get home safe!'
+  - 'Grimace: Get home safe!'
+  grittyEndDialogue:
+  - GRITTY END! :)
+  grimaceEndDialogue:
+  - GRIMACE END! :|
   choiceOne: {fileID: 1571761934}
   choiceTwo: {fileID: 1055680804}
   nextButton: {fileID: 1351969172}
