@@ -8,9 +8,13 @@ public class GameManager : MonoBehaviour
 {
 
     public List<string> partOneDialogue;
-    public List<string> partTwoDialogue;
-    public List<string> partThreeDialogue;
-    public List<string> partFourDialogue;
+    public List<string> partTwoYesDialogue;
+    public List<string> partTwoNoDialogue;
+    public List<string> partThreeYesDialogue;
+    public List<string> partThreeNoDialogue;
+    public List<string> partFourLeftDialogue;
+    public List<string> partFourRightDialogue;
+    public List<string> badEndDialogue;
 
     List<string> currentDialogue;
 
@@ -18,14 +22,19 @@ public class GameManager : MonoBehaviour
     int dialogueIndex = 0;
     int yesNumber = 0;
 
+    bool recentYes;
+
     public GameObject choiceOne;
     public GameObject choiceTwo;
     public GameObject nextButton;
 
     public TMP_Text dialogueBox;
+    public TMP_Text choiceOneBox;
+    public TMP_Text choiceTwoBox;
 
     public string endingOne;
     public string endingTwo;
+    public string badEnd;
 
     public Animator grittyAnim;
     public Animator grimaceAnim;
@@ -37,6 +46,9 @@ public class GameManager : MonoBehaviour
 
         choiceOne.SetActive(false);
         choiceTwo.SetActive(false);
+        choiceOneBox.text = "hell yeah!";
+        choiceTwoBox.text = "hell no!";
+
 
         currentDialogue = partOneDialogue;
         dialogueBox.text = currentDialogue[dialogueIndex];
@@ -46,15 +58,12 @@ public class GameManager : MonoBehaviour
 
     void SetDialogueText()
     {
-        if (phaseIndex < 4)
-        {
             dialogueBox.text = currentDialogue[dialogueIndex];
-        }
     }
 
     public void AdvanceDialogue()
     {
-        if (phaseIndex < 4)
+        if (phaseIndex < 5)
         {
 
             dialogueIndex++;
@@ -73,19 +82,28 @@ public class GameManager : MonoBehaviour
 
     void SetupChoices()
     {
-        nextButton.SetActive(false);
-        choiceOne.SetActive(false);
-        choiceTwo.SetActive(false);
+        if (phaseIndex < 4)
+        {
+            nextButton.SetActive(false);
+            choiceOne.SetActive(true);
+            choiceTwo.SetActive(true);
+        }
+        else
+        {
+            GoToNextPart();
+        }
     }
 
     public void NoChoice()
     {
+        recentYes = false;
         GoToNextPart();
     }
 
     public void YesChoice()
     {
         yesNumber++;
+        recentYes = true;
         GoToNextPart();
     }
 
@@ -102,20 +120,47 @@ public class GameManager : MonoBehaviour
         {
             case 0:
                 phaseIndex = 1;
-                currentDialogue = partTwoDialogue;
+                if (recentYes == true)
+                {
+                    currentDialogue = partTwoYesDialogue;
+                }
+                else
+                {
+                    currentDialogue = partTwoNoDialogue;
+                }
                 break;
             case 1:
                 phaseIndex = 2;
-                currentDialogue = partThreeDialogue;
+                if (recentYes == true)
+                {
+                    currentDialogue = partThreeYesDialogue;
+                    choiceOneBox.text = "LEFT";
+                    choiceTwoBox.text = "RIGHT";
+                }
+                else
+                {
+                    currentDialogue = partThreeNoDialogue;
+                    choiceOneBox.text = "LEFT";
+                    choiceTwoBox.text = "RIGHT";
+                }
                 break;
             case 2:
-                phaseIndex = 3;
-                currentDialogue = partFourDialogue;
+                if (recentYes == true)
+                {
+                    phaseIndex = 3;
+                    currentDialogue = partFourLeftDialogue;
+                }
+                else
+                {
+                    phaseIndex = 4;
+                    currentDialogue = partFourRightDialogue;
+                }
                 break;
             case 3:
-                phaseIndex = 4;
+                phaseIndex = 5;
                 break;
             case 4:
+                currentDialogue = badEndDialogue;
                 phaseIndex = 5;
                 break;
         }
